@@ -3,7 +3,7 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://reasonmagazine.com';
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://the-reason-magazine.vercel.app';
 
   // Static routes
   const routes = [
