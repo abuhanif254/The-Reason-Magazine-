@@ -31,13 +31,13 @@ const hindSiliguri = Hind_Siliguri({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://reasonmagazine.com'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://the-reason-magazine.vercel.app'),
   title: {
     template: '%s | Reason Magazine',
     default: 'Reason Magazine | Atheism Activism & Rational Discourse',
   },
   description: 'A professional, dynamic magazine-style blog focused on atheism activism, rational discourse, secular advocacy, and science.',
-  keywords: ['Atheism', 'Secularism', 'Rationalism', 'Science', 'Activism', 'Bangla Articles', 'Philosophy'],
+  keywords: ['Atheism', 'Secularism', 'Rationalism', 'Science', 'Activism', 'Bangla Articles', 'Philosophy', 'abu hanif', 'md abu hanif mia', 'baitullah', 'mohammad bitullah'],
   openGraph: {
     type: 'website',
     locale: 'en_US',
