@@ -1,0 +1,225 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "A user of the magazine, including admins, authors, and readers.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string", "format": "uri" },
+        "role": { "type": "string", "enum": ["admin", "author", "reader"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role", "createdAt"]
+    },
+    "Post": {
+      "title": "Post",
+      "description": "An article or blog post in the magazine.",
+      "type": "object",
+      "properties": {
+        "slug": { "type": "string", "description": "URL friendly identifier, used as document ID" },
+        "title": { "type": "string" },
+        "excerpt": { "type": "string" },
+        "content": { "type": "string", "description": "Markdown content" },
+        "coverImage": { "type": "string", "format": "uri" },
+        "authorId": { "type": "string" },
+        "authorName": { "type": "string" },
+        "authorPhoto": { "type": "string", "format": "uri" },
+        "publishedAt": { "type": "string", "format": "date-time" },
+        "status": { "type": "string", "enum": ["draft", "published"] },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "category": { "type": "string", "enum": ["Philosophy", "Secularism", "Science", "News", "Activism"] },
+        "likesCount": { "type": "number", "default": 0 },
+        "aiSummary": { "type": "string", "description": "AI generated TL;DR summary" },
+        "relatedPostSlugs": { "type": "array", "items": { "type": "string" }, "description": "Slugs of related articles suggested by AI" }
+      },
+      "required": ["slug", "title", "content", "authorId", "status", "publishedAt"]
+    },
+    "Multimedia": {
+      "title": "Multimedia",
+      "description": "Podcasts and videos.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "type": { "type": "string", "enum": ["podcast", "video"] },
+        "url": { "type": "string", "format": "uri" },
+        "thumbnail": { "type": "string", "format": "uri" },
+        "duration": { "type": "string" },
+        "publishedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "type", "url", "publishedAt"]
+    },
+    "LogicLabEntry": {
+      "title": "LogicLabEntry",
+      "description": "Rebuttals and arguments for the Logic Lab.",
+      "type": "object",
+      "properties": {
+        "claim": { "type": "string" },
+        "rebuttal": { "type": "string" },
+        "category": { "type": "string" },
+        "difficulty": { "type": "string", "enum": ["Beginner", "Intermediate", "Advanced"] },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["claim", "rebuttal", "category"]
+    },
+    "MapLocation": {
+      "title": "MapLocation",
+      "description": "Data points for the Secular Map.",
+      "type": "object",
+      "properties": {
+        "country": { "type": "string" },
+        "lat": { "type": "number" },
+        "lng": { "type": "number" },
+        "status": { "type": "string", "enum": ["Secular", "Theocratic", "Mixed", "Hostile"] },
+        "description": { "type": "string" },
+        "score": { "type": "number" }
+      },
+      "required": ["country", "lat", "lng", "status"]
+    },
+    "Heretic": {
+      "title": "Heretic",
+      "description": "Historical figures for the Hall of Heretics.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "era": { "type": "string" },
+        "contribution": { "type": "string" },
+        "image": { "type": "string", "format": "uri" },
+        "bio": { "type": "string" }
+      },
+      "required": ["name", "era", "contribution"]
+    },
+    "SanctuaryEntry": {
+      "title": "SanctuaryEntry",
+      "description": "Support resources for the Secular Sanctuary.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "type": { "type": "string", "enum": ["Support Group", "Legal Aid", "Housing", "Counseling"] },
+        "location": { "type": "string" },
+        "contact": { "type": "string" },
+        "description": { "type": "string" }
+      },
+      "required": ["name", "type", "location"]
+    },
+    "Fallacy": {
+      "title": "Fallacy",
+      "description": "Logical fallacies for the Fallacy Finder.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "definition": { "type": "string" },
+        "example": { "type": "string" },
+        "rebuttal": { "type": "string" }
+      },
+      "required": ["name", "definition", "example"]
+    },
+    "DeepDive": {
+      "title": "DeepDive",
+      "description": "Special editorial series.",
+      "type": "object",
+      "properties": {
+        "slug": { "type": "string" },
+        "title": { "type": "string" },
+        "subtitle": { "type": "string" },
+        "description": { "type": "string" },
+        "author": { "type": "string" },
+        "readTime": { "type": "string" },
+        "image": { "type": "string", "format": "uri" },
+        "accentColor": { "type": "string" },
+        "parts": { "type": "number" }
+      },
+      "required": ["slug", "title", "description", "author"]
+    },
+    "Comment": {
+      "title": "Comment",
+      "description": "A comment on a post.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "postId": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "userPhoto": { "type": "string", "format": "uri" },
+        "content": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["postId", "userId", "content", "createdAt"]
+    },
+    "Like": {
+      "title": "Like",
+      "description": "A like on a post by a user.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "postId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "postId", "createdAt"]
+    },
+    "NewsletterSubscription": {
+      "title": "NewsletterSubscription",
+      "description": "A newsletter subscription.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "format": "email" },
+        "subscribedAt": { "type": "string", "format": "date-time" },
+        "status": { "type": "string", "enum": ["active", "unsubscribed"] }
+      },
+      "required": ["email", "subscribedAt", "status"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "User profiles and roles."
+    },
+    "/posts/{slug}": {
+      "schema": { "$ref": "#/entities/Post" },
+      "description": "Magazine articles."
+    },
+    "/multimedia/{id}": {
+      "schema": { "$ref": "#/entities/Multimedia" },
+      "description": "Podcasts and videos."
+    },
+    "/logic_lab/{id}": {
+      "schema": { "$ref": "#/entities/LogicLabEntry" },
+      "description": "Logic Lab rebuttals."
+    },
+    "/map_locations/{id}": {
+      "schema": { "$ref": "#/entities/MapLocation" },
+      "description": "Secular Map data."
+    },
+    "/heretics/{id}": {
+      "schema": { "$ref": "#/entities/Heretic" },
+      "description": "Hall of Heretics entries."
+    },
+    "/sanctuary/{id}": {
+      "schema": { "$ref": "#/entities/SanctuaryEntry" },
+      "description": "Secular Sanctuary entries."
+    },
+    "/fallacies/{id}": {
+      "schema": { "$ref": "#/entities/Fallacy" },
+      "description": "Fallacy Finder entries."
+    },
+    "/deep_dives/{slug}": {
+      "schema": { "$ref": "#/entities/DeepDive" },
+      "description": "Special editorial series."
+    },
+    "/posts/{slug}/comments/{commentId}": {
+      "schema": { "$ref": "#/entities/Comment" },
+      "description": "Comments on a specific post."
+    },
+    "/likes/{likeId}": {
+      "schema": { "$ref": "#/entities/Like" },
+      "description": "Tracks which users liked which posts. ID is usually userId_postId."
+    },
+    "/newsletter_subscriptions/{email}": {
+      "schema": { "$ref": "#/entities/NewsletterSubscription" },
+      "description": "Newsletter email subscriptions."
+    }
+  }
+}

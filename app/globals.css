@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: var(--font-inter), var(--font-bengali), sans-serif;
+  --font-space: var(--font-space), var(--font-bengali), sans-serif;
+  --font-outfit: var(--font-outfit), var(--font-bengali), sans-serif;
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, var(--font-bengali), serif;
+}

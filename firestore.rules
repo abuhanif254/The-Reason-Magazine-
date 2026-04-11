@@ -1,0 +1,112 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() &&
+        (
+          request.auth.token.email == "mohammadbitullah@gmail.com" ||
+          (exists(/databases/$(database)/documents/users/$(request.auth.uid)) && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin')
+        );
+    }
+
+    function isAuthor() {
+      return isAuthenticated() &&
+        (
+          isAdmin() ||
+          (exists(/databases/$(database)/documents/users/$(request.auth.uid)) && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'author')
+        );
+    }
+
+    function hasRequiredFields(fields) {
+      return request.resource.data.keys().hasAll(fields);
+    }
+
+    function isValidEmail(email) {
+      return email is string && email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+    }
+
+    function isValidUrl(url) {
+      return url is string && url.size() > 0 && url.size() <= 2000;
+    }
+
+    // ===============================================================
+    // Domain Validators
+    // ===============================================================
+    function isValidUser(data) {
+      return hasRequiredFields(['uid', 'email', 'role', 'createdAt']) &&
+        data.uid is string && data.uid.size() > 0 &&
+        isValidEmail(data.email) &&
+        data.role in ['admin', 'author', 'reader'] &&
+        data.createdAt is timestamp;
+    }
+
+    function isValidPost(data) {
+      return hasRequiredFields(['slug', 'title', 'content', 'authorId', 'status', 'publishedAt']) &&
+        data.slug is string && data.slug.size() > 0 &&
+        data.title is string && data.title.size() > 0 &&
+        data.content is string && data.content.size() > 0 &&
+        data.status in ['draft', 'published'];
+    }
+
+    // ===============================================================
+    // Rules
+    // ===============================================================
+
+    // Public Collections (Read: Anyone, Write: Admin Only)
+    match /{collectionName}/{docId} {
+      allow read: if collectionName in ['posts', 'multimedia', 'logic_lab', 'map_locations', 'heretics', 'sanctuary', 'fallacies', 'deep_dives'];
+      allow write: if isAdmin();
+    }
+
+    // Specialized Rules for Users
+    match /users/{userId} {
+      allow read: if true;
+      allow create: if isOwner(userId) && isValidUser(request.resource.data) && 
+                    ((request.resource.data.role in ['reader', 'author']) || isAdmin());
+      allow update: if (isOwner(userId) && request.resource.data.role == resource.data.role) || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // Specialized Rules for Posts (Authors can write their own)
+    match /posts/{slug} {
+      allow read: if resource.data.status == 'published' || 
+                  (isAuthenticated() && resource.data.authorId == request.auth.uid) || 
+                  isAdmin();
+      allow create: if (isAuthor() || isAdmin()) && isValidPost(request.resource.data);
+      allow update: if (isAuthenticated() && (resource.data.authorId == request.auth.uid || isAdmin())) ||
+                    (isAuthenticated() && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['likesCount']));
+      allow delete: if isAdmin() || (isAuthenticated() && resource.data.authorId == request.auth.uid);
+
+      match /comments/{commentId} {
+        allow read: if true;
+        allow create: if isAuthenticated();
+        allow update: if isAuthenticated() && resource.data.userId == request.auth.uid;
+        allow delete: if isAdmin() || (isAuthenticated() && resource.data.userId == request.auth.uid);
+      }
+    }
+
+    match /likes/{likeId} {
+      allow read: if true;
+      allow create: if isAuthenticated();
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+
+    match /newsletter_subscriptions/{email} {
+      allow read: if isAdmin();
+      allow create: if true;
+      allow write: if isAdmin();
+    }
+  }
+}
