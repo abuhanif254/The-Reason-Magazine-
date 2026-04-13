@@ -182,7 +182,7 @@ export default function ContactPage() {
                   <Youtube className="w-5 h-5 text-gray-400 hover:text-red-600 cursor-pointer transition-colors" />
                   <Facebook className="w-5 h-5 text-gray-400 hover:text-red-600 cursor-pointer transition-colors" />
                   <Instagram className="w-5 h-5 text-gray-400 hover:text-red-600 cursor-pointer transition-colors" /> */}
-                </div>
+                {/* </div> */}
               </div>
             </div>
 
