@@ -130,7 +130,7 @@ export default function ContactPage() {
                 <h3 className="text-lg font-space font-bold text-gray-900 dark:text-white uppercase">Email Us</h3>
                 <p className="text-gray-600 dark:text-zinc-400 text-sm leading-relaxed">
                   General: mohammadbitullah@gmail.com <br />
-                  Editorial: mohammadbitullah@gmail.com />
+                  Editorial: mohammadbitullah@gmail.com <br />
                   Press: https://abu-hanif-mia.vercel.app
                 </p>
               </div>
@@ -160,12 +160,28 @@ export default function ContactPage() {
                 <div className="w-12 h-12 bg-gray-50 dark:bg-zinc-900 rounded-2xl flex items-center justify-center border border-gray-100 dark:border-zinc-800">
                   <Twitter className="w-6 h-6 text-red-600" />
                 </div>
+
                 <h3 className="text-lg font-space font-bold text-gray-900 dark:text-white uppercase">Follow Us</h3>
+<div className="flex gap-4">
+  <a href="https://x.com/MohammadBitull1" target="_blank" rel="noopener noreferrer">
+    <Twitter className="w-5 h-5 text-gray-400 hover:text-red-600 cursor-pointer transition-colors" />
+  </a>
+  <a href="https://youtube.com/@mohammadbitullah?si=lu-5OJ-DvM6XQWkT" target="_blank" rel="noopener noreferrer">
+    <Youtube className="w-5 h-5 text-gray-400 hover:text-red-600 cursor-pointer transition-colors" />
+  </a>
+  <a href="https://web.facebook.com/bitulla" target="_blank" rel="noopener noreferrer">
+    <Facebook className="w-5 h-5 text-gray-400 hover:text-red-600 cursor-pointer transition-colors" />
+  </a>
+  <a href="https://www.instagram.com/bitullah_aj" target="_blank" rel="noopener noreferrer">
+    <Instagram className="w-5 h-5 text-gray-400 hover:text-red-600 cursor-pointer transition-colors" />
+  </a>
+</div>
+                {/* <h3 className="text-lg font-space font-bold text-gray-900 dark:text-white uppercase">Follow Us</h3>
                 <div className="flex gap-4">
                   <Twitter  className="w-5 h-5 text-gray-400 hover:text-red-600 cursor-pointer transition-colors" />
                   <Youtube className="w-5 h-5 text-gray-400 hover:text-red-600 cursor-pointer transition-colors" />
                   <Facebook className="w-5 h-5 text-gray-400 hover:text-red-600 cursor-pointer transition-colors" />
-                  <Instagram className="w-5 h-5 text-gray-400 hover:text-red-600 cursor-pointer transition-colors" />
+                  <Instagram className="w-5 h-5 text-gray-400 hover:text-red-600 cursor-pointer transition-colors" /> */}
                 </div>
               </div>
             </div>
