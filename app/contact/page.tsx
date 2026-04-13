@@ -129,9 +129,9 @@ export default function ContactPage() {
                 </div>
                 <h3 className="text-lg font-space font-bold text-gray-900 dark:text-white uppercase">Email Us</h3>
                 <p className="text-gray-600 dark:text-zinc-400 text-sm leading-relaxed">
-                  General: office@reasonmag.com<br />
-                  Editorial: editor@reasonmag.com<br />
-                  Press: media@reasonmag.com
+                  General: mohammadbitullah@gmail.com <br />
+                  Editorial: mohammadbitullah@gmail.com />
+                  Press: https://abu-hanif-mia.vercel.app
                 </p>
               </div>
               <div className="space-y-4">
@@ -140,9 +140,10 @@ export default function ContactPage() {
                 </div>
                 <h3 className="text-lg font-space font-bold text-gray-900 dark:text-white uppercase">Visit Us</h3>
                 <p className="text-gray-600 dark:text-zinc-400 text-sm leading-relaxed">
-                  123 Rationalist Way<br />
-                  Secular Plaza, Suite 400<br />
-                  London, UK EC1A 1BB
+                 The Reason Magazine <br />
+                  Chiknirchar, Karshakriyail, 2300 Kishoreganj Sadar<br />
+                  Dhaka, Bangladesh 
+                 
                 </p>
               </div>
               <div className="space-y-4">
@@ -151,8 +152,8 @@ export default function ContactPage() {
                 </div>
                 <h3 className="text-lg font-space font-bold text-gray-900 dark:text-white uppercase">Call Us</h3>
                 <p className="text-gray-600 dark:text-zinc-400 text-sm leading-relaxed">
-                  Office: +44 20 7946 0123<br />
-                  Mon-Fri, 9am - 6pm GMT
+                  Office: +8801724010261<br />
+                Bangladesh (BST/UTC+6): 15:00 - 00:00 (3 PM - 12 AM) 
                 </p>
               </div>
               <div className="space-y-4">
@@ -161,7 +162,7 @@ export default function ContactPage() {
                 </div>
                 <h3 className="text-lg font-space font-bold text-gray-900 dark:text-white uppercase">Follow Us</h3>
                 <div className="flex gap-4">
-                  <Twitter className="w-5 h-5 text-gray-400 hover:text-red-600 cursor-pointer transition-colors" />
+                  <Twitter  className="w-5 h-5 text-gray-400 hover:text-red-600 cursor-pointer transition-colors" />
                   <Youtube className="w-5 h-5 text-gray-400 hover:text-red-600 cursor-pointer transition-colors" />
                   <Facebook className="w-5 h-5 text-gray-400 hover:text-red-600 cursor-pointer transition-colors" />
                   <Instagram className="w-5 h-5 text-gray-400 hover:text-red-600 cursor-pointer transition-colors" />
@@ -179,7 +180,7 @@ export default function ContactPage() {
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="bg-white dark:bg-zinc-950 px-8 py-4 rounded-2xl shadow-2xl border border-gray-100 dark:border-zinc-800 flex items-center gap-3">
                   <MapPin className="w-5 h-5 text-red-600" />
-                  <span className="font-outfit font-black uppercase tracking-widest text-[10px] text-gray-900 dark:text-white">Reason HQ &bull; London</span>
+                  <span className="font-outfit font-black uppercase tracking-widest text-[10px] text-gray-900 dark:text-white">2300 Kishoreganj Sadar, Dhaka</span>
                 </div>
               </div>
             </div>
